@@ -1,1 +1,7 @@
-<p>list-page works!</p>
+<ul>
+  @for (hero of (heroes$ | async); track hero.id) {
+    <li>{{hero.superhero}}</li>
+  } @empty {
+    <li>There are no heroes to show</li>
+  }
+</ul>
