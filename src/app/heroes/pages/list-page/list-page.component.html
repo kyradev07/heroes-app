@@ -1,7 +1,11 @@
-<ul>
+<h1>Heroes List</h1>
+
+<mat-divider/>
+
+<div class="grid bm-8 pt-2">
   @for (hero of (heroes$ | async); track hero.id) {
-    <li>{{hero.superhero}}</li>
-  } @empty {
-    <li>There are no heroes to show</li>
+    <div class="col-12 sm:col-4 md:col-3 xl:col-2">
+      <app-card [hero]="hero"></app-card>
+    </div>
   }
-</ul>
+</div>

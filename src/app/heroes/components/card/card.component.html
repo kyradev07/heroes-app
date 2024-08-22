@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ hero().superhero }}</mat-card-title>
+    <mat-card-subtitle>{{ hero().alter_ego }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <!--Image-->
+
+  <mat-card-content class="mt-2">
+    <h4>{{ hero().publisher }}</h4>
+    <p>
+      <strong>First appearance: </strong>{{ hero().first_appearance }}
+      <br>
+      <mat-chip-listbox>
+        @for (name of hero().characters.split(',') | slice:0:4; track name) {
+          <mat-chip>
+            {{ name }}
+          </mat-chip>
+        }
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="['/heroes/edit', hero().id]">
+      <mat-icon fontIcon="edit"/>
+      Edit
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-raised-button [routerLink]="['/heroes', hero().id]">
+      <mat-icon fontIcon="more_horiz"/>
+      Show
+    </button>
+  </mat-card-actions>
+
+
+</mat-card>
+
+
