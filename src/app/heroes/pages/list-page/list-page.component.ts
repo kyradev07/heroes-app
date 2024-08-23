@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeroesService } from "../../services/heroes.service";
 import { Observable } from "rxjs";
 import { Hero } from "../../interfaces/hero.interface";
@@ -9,10 +9,10 @@ import { Hero } from "../../interfaces/hero.interface";
 })
 export class ListPageComponent {
 
+  private heroesService: HeroesService = inject(HeroesService);
   heroes$: Observable<Hero[]>;
 
-
-  constructor(private heroesService: HeroesService) {
+  constructor() {
     this.heroes$ = this.heroesService.getHeroes();
   }
 

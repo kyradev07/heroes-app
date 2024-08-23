@@ -17,9 +17,7 @@ export class LayoutPageComponent {
     { label: 'Search', icon: 'search', url: './search' },
   ];
 
-
   openCloseNav(): void {
-    console.log('Signal');
     this.sidenavSgn().toggle().then();
   }
 
