@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroPageComponent } from './pages/hero-page/hero-page.component';
@@ -22,11 +22,11 @@ import { HeroImagePipe } from './pipes/hero-image.pipe';
     CardComponent,
     HeroImagePipe
   ],
-    imports: [
-        CommonModule,
-        HeroesRoutingModule,
-        MaterialModule,
-        NgOptimizedImage
-    ]
+  imports: [
+    CommonModule,
+    HeroesRoutingModule,
+    MaterialModule
+  ]
 })
-export class HeroesModule { }
+export class HeroesModule {
+}
