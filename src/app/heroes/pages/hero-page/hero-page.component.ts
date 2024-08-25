@@ -27,4 +27,8 @@ export class HeroPageComponent {
       })
     );
   }
+
+  goBack(): void {
+    this.router.navigate(['/heroes/list']).then();
+  }
 }
