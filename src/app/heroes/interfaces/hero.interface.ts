@@ -7,3 +7,8 @@ export type Hero = {
   characters: string;
   alt_img?: string;
 }
+
+export type Publisher = {
+  id: string;
+  publisher: string;
+}

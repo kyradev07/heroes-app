@@ -1,1 +1,59 @@
-<p>new-page works!</p>
+<h1>Create/Edit Hero <small>Superman</small></h1>
+
+<mat-divider class="mb-2"/>
+
+<div class="grid">
+  <div class="col-12 sm:col-6">
+
+    <mat-card>
+
+      <mat-card-content>
+        <div class="grid">
+
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Super Hero</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Alter Ego</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>First Appearance</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Characters</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Creator</mat-label>
+            <mat-select>
+              @for (publisher of publishers; track publisher.id) {
+                <mat-option [value]="publisher.publisher">{{ publisher.id }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div class="flex justify-content-between">
+          <button mat-flat-button color="warn"><mat-icon fontIcon="delete"/>Delete</button>
+          <button mat-flat-button><mat-icon fontIcon="save"/>Save</button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div class="col-12 sm:col-6">
+    <mat-card>
+      <img mat-card-image src="" alt="Hero Image">
+    </mat-card>
+  </div>
+</div>
