@@ -1,4 +1,4 @@
-export interface Hero {
+export type Hero = {
   id: string;
   superhero: string;
   alter_ego: string;
