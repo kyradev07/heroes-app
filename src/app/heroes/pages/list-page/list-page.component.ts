@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { HeroesService } from "../../services/heroes.service";
-import { Observable } from "rxjs";
 import { Hero } from "../../interfaces/hero.interface";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-list-page',
@@ -10,10 +10,11 @@ import { Hero } from "../../interfaces/hero.interface";
 export class ListPageComponent {
 
   private heroesService: HeroesService = inject(HeroesService);
-  heroes$: Observable<Hero[]>;
+  heroesSignal: Signal<Hero[] | undefined>;
 
   constructor() {
-    this.heroes$ = this.heroesService.getHeroes();
+    this.heroesSignal = toSignal(this.heroesService.getHeroes());
   }
+
 
 }
