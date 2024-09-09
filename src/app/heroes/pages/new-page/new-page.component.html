@@ -49,7 +49,7 @@
         <div class="flex justify-content-between">
           <button mat-flat-button (click)="onSubmit()" [disabled]="heroForm.invalid"><mat-icon fontIcon="save"/>Save</button>
           @if (isEditing) {
-            <button mat-flat-button color="warn"><mat-icon fontIcon="delete"/>Delete</button>
+            <button mat-flat-button color="warn" (click)="openDialog()"><mat-icon fontIcon="delete"/>Delete</button>
           }
         </div>
 

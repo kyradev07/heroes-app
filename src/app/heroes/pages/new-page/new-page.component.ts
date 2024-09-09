@@ -3,8 +3,10 @@ import { Hero, Publisher, PublisherOptions } from "../../interfaces/hero.interfa
 import { FormControl, FormGroup } from "@angular/forms";
 import { HeroesService } from "../../services/heroes.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { switchMap } from "rxjs";
+import { filter, switchMap } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ConfirmDialogComponent } from "../../components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-new-page',
@@ -17,6 +19,7 @@ export class NewPageComponent implements OnInit {
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private snackBar: MatSnackBar = inject(MatSnackBar);
+  private dialog: MatDialog = inject(MatDialog);
 
   isEditing: boolean;
   heroForm: FormGroup;
@@ -61,7 +64,7 @@ export class NewPageComponent implements OnInit {
         next: (value: Hero) => {
           this.heroForm.reset(value);
         },
-        error: () => this.router.navigate(['/heroes/list']).then(),
+        error: () => this.redirectHome()
       });
     }
   }
@@ -73,13 +76,35 @@ export class NewPageComponent implements OnInit {
     } else {
       this.heroService.addHero(this.currentHero()).subscribe(heroR => {
         this.showSnackBar(`Hero ${heroR.superhero} added!`);
-        this.router.navigate(['/heroes/list']).then();
+        this.redirectHome();
       });
     }
+
   }
 
   private showSnackBar(message: string): void {
     this.snackBar.open(message, 'Done', { duration: 3000 });
   }
 
+  openDialog(): void {
+    const matDialogRef: MatDialogRef<ConfirmDialogComponent, boolean> = this.dialog.open(ConfirmDialogComponent, {
+      data: this.currentHero().superhero
+    });
+
+    matDialogRef.afterClosed().pipe(
+      filter(result => result === true),
+      switchMap(() => this.heroService.deleteHeroById(this.currentHero().id))
+    ).subscribe({
+        next: () => {
+          this.showSnackBar(`Hero ${this.currentHero().superhero} deleted!`);
+          this.redirectHome();
+        },
+        error: () => this.showSnackBar(`Error deleting hero ${this.currentHero().superhero}`),
+      }
+    );
+  }
+
+  private redirectHome(): void {
+    this.router.navigate(['/']).then();
+  }
 }
