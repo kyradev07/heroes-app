@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { Hero } from "../interfaces/hero.interface";
 
@@ -35,9 +35,6 @@ export class HeroesService {
   }
 
   deleteHeroById(id: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.baseUrl}/heroes/${id}`).pipe(
-      catchError(() => of(false)),
-      map(() => true)
-    );
+    return this.http.delete<boolean>(`${this.baseUrl}/heroes/${id}`);
   }
 }
