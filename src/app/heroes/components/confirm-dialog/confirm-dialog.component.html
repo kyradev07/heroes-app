@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete Hero</h2>
+<mat-dialog-content>
+  Would you like to delete {{ hero }}?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="onClose(false)"><mat-icon fontIcon="close"/>No</button>
+  <button mat-raised-button (click)="onClose(true)"><mat-icon fontIcon="check"/>Ok</button>
+</mat-dialog-actions>
