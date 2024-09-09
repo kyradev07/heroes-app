@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError, delay, map, Observable, of, throwError } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { Hero } from "../interfaces/hero.interface";
 
@@ -31,12 +31,7 @@ export class HeroesService {
   }
 
   updateHero(hero: Hero): Observable<Hero> {
-    /*if (!hero.id) {
-      throw Error('Hero id is missing');
-    }*/
-    return this.http.patch<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero).pipe(
-      catchError(() => throwError(() => new Error('Hero id is missing')))
-    );
+    return this.http.patch<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero);
   }
 
   deleteHeroById(id: string): Observable<boolean> {
