@@ -1,19 +1,23 @@
-<div class="flex flex-column">
-  <span class="text-lg mb-4">Login</span>
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <div class="flex flex-column">
+    <span class="text-lg mb-4">Login</span>
 
     <mat-form-field appearance="outline">
-      <mat-label>User</mat-label>
-      <input type="text" matInput placeholder="User">
+      <mat-label>User ID</mat-label>
+      <input type="text" matInput required formControlName="userId">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input type="password" matInput  placeholder="Password">
+      <input type="password" matInput required formControlName="password">
     </mat-form-field>
 
-    <button mat-flat-button><mat-icon>save</mat-icon>Log In</button>
+    <button mat-flat-button type="submit"><mat-icon>save</mat-icon>Log In</button>
 
     <div class="flex justify-content-end mt-5">
-      <a mat-raised-button routerLink="/auth/register">Are you new here?<mat-icon>open_in_new</mat-icon></a>
+      <a mat-raised-button routerLink="/auth/register">Are you new here?
+        <mat-icon>open_in_new</mat-icon>
+      </a>
     </div>
-</div>
+  </div>
+</form>
