@@ -1,5 +1,8 @@
-import { Component, viewChild } from '@angular/core';
+import { Component, inject, signal, viewChild, WritableSignal } from '@angular/core';
 import { MatSidenav } from "@angular/material/sidenav";
+import { AuthService } from "../../../auth/services/auth.service";
+import { Router } from "@angular/router";
+import { User } from "../../../auth/interfaces/user.interface";
 
 @Component({
   selector: 'app-layout-page',
@@ -7,6 +10,11 @@ import { MatSidenav } from "@angular/material/sidenav";
   styles: ``
 })
 export class LayoutPageComponent {
+
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+
+  user: WritableSignal<User | null> = signal(this.authService.getCurrentUser());
 
   // @ViewChild('sidenav') sidenav!: MatSidenav;
   sidenavSgn = viewChild.required(MatSidenav);
@@ -21,4 +29,8 @@ export class LayoutPageComponent {
     this.sidenavSgn().toggle().then();
   }
 
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']).then();
+  }
 }
